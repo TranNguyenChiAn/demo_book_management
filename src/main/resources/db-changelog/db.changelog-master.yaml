@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: book_1
+      author: tunguyen
+      changes:
+        - createTable:
+            tableName: books
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(255)
+                  nullable: false
+              - column:
+                  name: author
+                  type: varchar(255)
+                  nullable: false
+              - column:
+                  name: quantity
+                  type: int
+                  nullable: false
+              - column:
+                  name: genre_id
+                  type: int
+                  nullable: false
+              - column:
+                  name: publisher_id
+                  type: int
+                  nullable: false
+
+              - column:
+                  name: publication_year
+                  type: year
+                  nullable: false
+
+              - column:
+                  name: description
+                  type: text
+
+              - column:
+                  name: summary
+                  type: text
+
+              - column:
+                  name: page_number
+                  type: int
+                  nullable: false
+
+              - column:
+                  name: price
+                  type: float
+                  nullable: false
