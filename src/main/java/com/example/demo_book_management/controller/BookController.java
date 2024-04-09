@@ -17,12 +17,12 @@ public class BookController {
     @Autowired
     private BookRepository bookRepository;
 
-    @GetMapping("")
+    @GetMapping("show-all")
     List<Book> getAllBooks(){
         return bookRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-id/{id}")
     ResponseEntity<ResponseObject> findById(@PathVariable Long id){
          Optional<Book> foundBook = bookRepository.findById(id);
          if (foundBook.isPresent()){
@@ -36,7 +36,7 @@ public class BookController {
          }
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/create-book")
     ResponseEntity<ResponseObject> insertBook(@RequestBody Book newBook){
         List<Book> foundBook = bookRepository.findByTitle(newBook.getTitle().trim());
 
@@ -51,7 +51,7 @@ public class BookController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit-book/{id}")
     ResponseEntity<ResponseObject> updateBook(@RequestBody Book newBook, @PathVariable Long id) {
         Book updateBook = bookRepository.findById(id)
                 .map(book -> {
@@ -75,7 +75,7 @@ public class BookController {
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-book/{id}")
     ResponseEntity<ResponseObject> deleteBook(@PathVariable Long id){
         boolean exists = bookRepository.existsById(id);
         if (exists){

@@ -18,12 +18,12 @@ public class GenreController {
     @Autowired
     private GenreRepository genreRepository;
 
-    @GetMapping("")
+    @GetMapping("show-all")
     List<Genre> getAllGenres(){
         return genreRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-id/{id}")
     ResponseEntity<ResponseObject> findById(@PathVariable Long id) {
         Optional<Genre> foundGenre= genreRepository.findById(id);
         if (foundGenre.isPresent()) {
@@ -37,7 +37,7 @@ public class GenreController {
         }
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/create-genre")
     ResponseEntity<ResponseObject> insertGenre(@RequestBody Genre newGenre){
         List<Genre> foundGenre = genreRepository.findByName(newGenre.getName().trim());
 
@@ -52,7 +52,7 @@ public class GenreController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit-genre/{id}")
     ResponseEntity<ResponseObject> updateGenre(@RequestBody Genre newGenre, @PathVariable Long id) {
         Genre updateGenre = genreRepository.findById(id)
                 .map(Genre -> {
@@ -67,7 +67,7 @@ public class GenreController {
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-genre/{id}")
     ResponseEntity<ResponseObject> deleteGenre(@PathVariable Long id){
         boolean exists = genreRepository.existsById(id);
         if (exists){

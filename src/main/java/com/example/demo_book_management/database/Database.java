@@ -18,10 +18,7 @@ public class Database {
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-//                Book bookA = new Book("March 7th", "Stelle", 30.29, 20);
-//                Book bookB = new Book("Stelle", "Dan Hang", 30.29, 10);
-//                logger.info("insert data: " + bookRepository.save(bookA));
-//                logger.info("insert data: " + bookRepository.save(bookB));
+
             }
         };
     }
