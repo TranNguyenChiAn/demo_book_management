@@ -18,12 +18,12 @@ public class PublisherController {
     @Autowired
     private PublisherRepository publisherRepository;
 
-    @GetMapping("")
+    @GetMapping("/show-all")
     List<Publisher> getAllPublishers(){
         return publisherRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/find-by-id/{id}")
     ResponseEntity<ResponseObject> findById(@PathVariable Long id) {
         Optional<Publisher> foundPublisher= publisherRepository.findById(id);
         if (foundPublisher.isPresent()) {
@@ -37,7 +37,7 @@ public class PublisherController {
         }
     }
 
-    @PostMapping("/insert")
+    @PostMapping("/create-publisher")
     ResponseEntity<ResponseObject> insertPublisher(@RequestBody Publisher newPublisher){
         List<Publisher> foundPublisher = publisherRepository.findByName(newPublisher.getName().trim());
 
@@ -52,7 +52,7 @@ public class PublisherController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/edit-publisher/{id}")
     ResponseEntity<ResponseObject> updatePublisher(@RequestBody Publisher newPublisher, @PathVariable Long id) {
         Publisher updatePublisher = publisherRepository.findById(id)
                 .map(Publisher -> {
@@ -67,7 +67,7 @@ public class PublisherController {
         );
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete-publisher/{id}")
     ResponseEntity<ResponseObject> deletePublisher(@PathVariable Long id){
         boolean exists = publisherRepository.existsById(id);
         if (exists){
